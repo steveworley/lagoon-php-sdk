@@ -24,6 +24,13 @@ abstract class LagoonMutationBase implements LagoonMutationInterface {
   }
 
   /**
+   * Get the keys to validate.
+   *
+   * @return array
+   */
+  protected abstract function expectedKeys();
+
+  /**
    * Validate the the provided variables.
    *
    * This ensures that each mutation can validate the data provided
@@ -31,7 +38,10 @@ abstract class LagoonMutationBase implements LagoonMutationInterface {
    *
    * @throws \Exception
    */
-  protected abstract function validate(array $variables = []);
+  protected function validate(array $variables = []) {
+    $missing = array_diff($this->expectedKeys(), array_keys($variables));
+    assert(count($missing) === 0, "Keys [" . implode(', ', $missing) . "] missing.");
+  }
 
   /**
    * The graphql string for the mutation.

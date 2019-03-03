@@ -5,9 +5,9 @@ namespace Lagoon\Query\Project;
 use Lagoon\Query\LagoonQueryBase;
 
 /**
- * Fetch all projects from Lagoon.
+ * Find a project by the git url.
  */
-class FetchAll extends LagoonQueryBase {
+class FindByGit extends LagoonQueryBase {
 
   /**
    * {@inheritdoc}
@@ -20,13 +20,11 @@ class FetchAll extends LagoonQueryBase {
    * {@inheritdoc}
    */
   protected function query() {
-    return <<<'QUERY'
+    return <<<QUERY
 {
-  allProjects {
+  projectByGitUrl(\$gitUrl: String) {
     id
     name
-    customer { id }
-    gitUrl
   }
 }
 QUERY;
