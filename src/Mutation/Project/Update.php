@@ -1,17 +1,19 @@
 <?php
 
-namespace Lagoon\Mutation;
+namespace Lagoon\Mutation\Project;
+
+use Lagoon\Mutation\LagoonMutationBase;
 
 /**
  * Update a project using the grpahql api.
  */
-class UpdateProject extends LagoonMutationBase {
+class Update extends LagoonMutationBase {
 
   /**
    * {@inheritdoc}
    */
-  protected function validate(array $variables = []) {
-    $expected_keys = [
+  protected function expectedKeys() {
+    return [
       'id',
       'name',
       'customer',
@@ -20,8 +22,6 @@ class UpdateProject extends LagoonMutationBase {
       'productionEnvironment',
       'branches'
     ];
-    $missing = array_diff($expected_keys, array_keys($variables));
-    assert(count($missing) === 0, "Keys [" . implode(', ', $missing) . "] missing. Cannot add project.");
   }
 
   /**

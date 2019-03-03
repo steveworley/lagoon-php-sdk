@@ -1,17 +1,19 @@
 <?php
 
-namespace Lagoon\Mutation;
+namespace Lagoon\Mutation\Project;
+
+use Lagoon\Mutation\LagoonMutationBase;
 
 /**
  * Add a project using the graphql api.
  */
-class AddProject extends LagoonMutationBase {
+class Add extends LagoonMutationBase {
 
   /**
    * {@inheritdoc}
    */
-  protected function validate(array $variables = []) {
-    $expected_keys = [
+  protected function expectedKeys(array $variables = []) {
+    return [
       'name',
       'customer',
       'openshift',
@@ -19,8 +21,6 @@ class AddProject extends LagoonMutationBase {
       'productionEnvironment',
       'branches'
     ];
-    $missing = array_diff($expected_keys, array_keys($variables));
-    assert(count($missing) === 0, "Keys [" . implode(', ', $missing) . "] missing. Cannot add project.");
   }
 
   /**

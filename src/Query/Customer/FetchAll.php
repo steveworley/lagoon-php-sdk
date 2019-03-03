@@ -1,11 +1,11 @@
 <?php
 
-namespace Lagoon\Query\Project;
+namespace Lagoon\Query\Customer;
 
 use Lagoon\Query\LagoonQueryBase;
 
 /**
- * Fetch all projects from Lagoon.
+ * Fetch all customers from Lagoon.
  */
 class FetchAll extends LagoonQueryBase {
 
@@ -22,11 +22,9 @@ class FetchAll extends LagoonQueryBase {
   protected function query() {
     return <<<'QUERY'
 {
-  allProjects {
+  allCustomers {
     id
     name
-    customer { id }
-    gitUrl
   }
 }
 QUERY;
