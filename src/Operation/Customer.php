@@ -5,6 +5,7 @@ namespace Lagoon\Operation;
 use Lagoon\Operation\LagoonOperationBase;
 use Lagoon\Mutation\Customer\Add;
 use Lagoon\Query\Customer\FetchAll;
+use Lagoon\Query\Customer\FindByName;
 
 /**
  * Customer graphql operations.
@@ -25,7 +26,8 @@ class Customer extends LagoonOperationBase {
   protected function bind() {
     $this
       ->addMutation(self::ADD, Add::class)
-      ->addQuery(self::FETCH_ALL, FetchAll::class);
+      ->addQuery(self::FETCH_ALL, FetchAll::class)
+      ->addQuery(self::FETCH_BY_NAME, FindByName::class);
   }
 
   /**
@@ -49,5 +51,18 @@ class Customer extends LagoonOperationBase {
    */
   public function all() {
     return $this->query(self::FETCH_ALL);
+  }
+
+  /**
+   * Fetch a customer form the API.
+   *
+   * @param string $variables
+   *   The name of a project.
+   *
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
+   */
+  public function withName($name) {
+    return $this->query(SELF::FETCH_BY_NAME, ['name' => $name]);
   }
 }
