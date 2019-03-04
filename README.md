@@ -1,5 +1,7 @@
 # Lagoon PHP SDK
 
+[![CircleCI](https://circleci.com/gh/steveworley/lagoon-php-sdk.svg?style=svg&circle-token=0b96bf2aab7e227d9a6b528fe5dff25d4de6e537)](https://circleci.com/gh/steveworley/lagoon-php-sdk)
+
 The *Lagoon SDK for PHP* makes it easy for developers to connect their applications to the Lagoon GraphQL service in PHP Code.
 
 ## Getting started
