@@ -12,10 +12,13 @@
   ],
   "require": {
     "php": ">=7",
-    "euautomation/graphql-client": "^0.2.0"
+    "euautomation/graphql-client": "^0.2.0",
+    "phpunit/phpunit": "^7.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.5"
+  },
+  "scripts": {
+    "test": "phpunit"
   },
   "autoload": {
     "psr-4": {

@@ -52,24 +52,29 @@ abstract class LagoonQueryBase implements LagoonQueryInterface {
   protected abstract function query();
 
   /**
-   * Validate the the provided variables.
-   *
-   * This ensures that each mutation can validate the data provided
-   * by the user before issuing the query.
-   *
-   * @throws \Exception
+   * {@inheritdoc}
    */
-  protected function validate() {
-    $missing = array_diff($this->expectedKeys(), array_keys($this->variables));
-    assert(count($missing) === 0, "Keys [" . implode(', ', $missing) . "] missing.");
+  public function validate() {
+    $expected = $this->expectedKeys();
+    $variables = $this->getVariables();
+    $missing = array_diff($expected, array_keys($variables));
+
+    assert(count($missing) === 0, "Keys [" . implode(', ', $missing) . "] exist.");
   }
 
   /**
    * Set the variables for this instance.
    */
-  final public function setVariables($variables = []) {
+  public function setVariables($variables = []) {
     $this->variables = $variables;
     return $this;
+  }
+
+  /**
+   * Get the assigned variables.
+   */
+  public function getVariables() {
+    return $this->variables;
   }
 
   /**
@@ -86,12 +91,15 @@ abstract class LagoonQueryBase implements LagoonQueryInterface {
     return $this;
   }
 
+  final public function getQuery() {
+    return sprintf($this->query(), implode(',', $this->fieldList));
+  }
+
   /**
    * {@inheritdoc}
    */
   final public function execute() {
     $this->validate();
-    $query = sprintf($this->query(), implode(',', $this->fieldList));
-    return LagoonResult::fromJSON($this->client->json($query, $this->variables));
+    return LagoonResult::fromJSON($this->client->json($this-> getQuery(), $this->variables));
   }
 }

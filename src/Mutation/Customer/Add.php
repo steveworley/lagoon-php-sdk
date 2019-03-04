@@ -1,13 +1,13 @@
 <?php
 
-namespace Lagoon\Mutation\Project;
+namespace Lagoon\Mutation\Customer;
 
-use Lagoon\Mutation\LagoonMutationBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Add a project using the graphql api.
  */
-class Add extends LagoonMutationBase {
+class Add extends LagoonQueryBase {
 
   /**
    * {@inheritdoc}
