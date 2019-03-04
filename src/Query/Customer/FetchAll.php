@@ -2,7 +2,7 @@
 
 namespace Lagoon\Query\Customer;
 
-use Lagoon\Query\LagoonQueryBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Fetch all customers from Lagoon.
@@ -12,8 +12,8 @@ class FetchAll extends LagoonQueryBase {
   /**
    * {@inheritdoc}
    */
-  protected function validate(array $variables = []) {
-    return true;
+  protected function expectedKeys(array $variables = []) {
+    return [];
   }
 
   /**
@@ -23,8 +23,7 @@ class FetchAll extends LagoonQueryBase {
     return <<<'QUERY'
 {
   allCustomers {
-    id
-    name
+    %s
   }
 }
 QUERY;

@@ -7,7 +7,7 @@ use Lagoon\Mutation\Project\Add;
 use Lagoon\Mutation\Project\Update;
 use Lagoon\Query\Project\FetchAll;
 use Lagoon\Query\Project\FindByName;
-use Lagoon\LagoonResult;
+use Lagoon\Query\Project\FindByGit;
 
 /**
  * All graphql project operations.
@@ -28,11 +28,11 @@ class Project extends LagoonOperationBase {
    */
   protected function bind() {
     $this
-      ->addMutation(self::ADD_PROJECT, new Add($this->client))
-      ->addMutation(self::UPDATE_PROJECT, new Update($this->client))
-      ->addQuery(self::FETCH_BY_NAME, new FindByName($this->client))
-      ->addQuery(self::FETCH_ALL, new FetchAll($this->client))
-      ->addQuert(self::FETCH_BY_GIT, new FetchByGit($this->client));
+      ->addMutation(self::ADD_PROJECT, Add::class)
+      ->addMutation(self::UPDATE_PROJECT, Update::class)
+      ->addQuery(self::FETCH_BY_NAME, FindByName::class)
+      ->addQuery(self::FETCH_ALL, FetchAll::class)
+      ->addQuery(self::FETCH_BY_GIT, FindByGit::class);
   }
 
   /**
@@ -41,12 +41,11 @@ class Project extends LagoonOperationBase {
    * @param array $variables
    *   A list of variables to add.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
   public function add(array $variables = []) {
-    $result = $this->mutation(self::ADD_PROJECT)->execute($variables);
-    return LagoonResult::fromJSON($result);
+    return $this->mutation(SELF:: ADD_PROJECT, $variables);
   }
 
   /**
@@ -55,50 +54,46 @@ class Project extends LagoonOperationBase {
    * @param array $variables
    *   A list of variables to update.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
-  public function update($variables) {
-    $result = $this->mutations(self::UPDATE_PROJECT)->execute($variables);
-    return LagoonResult::fromJSON($result);
+  public function update(array $variables = []) {
+    return $this->mutation(SELF::UPDATE_PROJECT, $variables);
   }
 
   /**
    * Fetch a project form the API.
    *
-   * @param array $variables
-   *   A list of variables to update.
+   * @param string $variables
+   *   The name of a project.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
-  public function fetch($variables) {
-    $result = $this->query(self::FETCH_BY_NAME)->execute($variables);
-    return LagoonResult::fromJSON($result);
+  public function withName($name) {
+    return $this->query(SELF::FETCH_BY_NAME, ['name' => $name]);
   }
 
   /**
    * Find a project by the git url.
    *
-   * @params string $gitUrl
+   * @param string $gitUrl
    *   The git url.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
   public function withGit($gitUrl) {
-    $result = $this->query(self::FETCH_BY_GIT)->exect(['gitUrl' => $gitUrl]);
-    return LagoonResult::fromJSON($result);
+    return $this->query(SELF::FETCH_BY_GIT, ['gitUrl' => $gitUrl]);
   }
 
   /**
    * Fetch all projects from the API.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
   public function all() {
-    $result = $this->query(self::FETCH_ALL)->execute([]);
-    return LagoonResult::fromJSON($result);
+    return $this->query(SELF::FETCH_ALL);
   }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Lagoon\Mutation;
+namespace Lagoon;
 
 use Lagoon\LagoonClientInterface;
 
 /**
  * Interface for the mutations.
  */
-interface LagoonMutationInterface {
+interface LagoonQueryInterface {
   /**
    * Construct the mutation instance.
    *
@@ -17,12 +17,17 @@ interface LagoonMutationInterface {
   public function __construct(LagoonClientInterface $client);
 
   /**
-   * Execute the mutation
+   * Set the fields on the instance.
    *
-   * @param array $variables
-   *   The variables to send with the mutation.
+   * @param array $fields
+   *   The fields.
+   */
+  public function fields(array $fields = []);
+
+  /**
+   * Execute the mutation
    *
    * @return mixed
    */
-  public function execute(array $variables = []);
+  public function execute();
 }

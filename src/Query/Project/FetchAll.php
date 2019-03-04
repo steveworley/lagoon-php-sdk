@@ -2,7 +2,7 @@
 
 namespace Lagoon\Query\Project;
 
-use Lagoon\Query\LagoonQueryBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Fetch all projects from Lagoon.
@@ -12,8 +12,8 @@ class FetchAll extends LagoonQueryBase {
   /**
    * {@inheritdoc}
    */
-  protected function validate(array $variables = []) {
-    return true;
+  protected function expectedKeys() {
+    return [];
   }
 
   /**
@@ -21,12 +21,9 @@ class FetchAll extends LagoonQueryBase {
    */
   protected function query() {
     return <<<'QUERY'
-{
+query findAll {
   allProjects {
-    id
-    name
-    customer { id }
-    gitUrl
+    %s
   }
 }
 QUERY;

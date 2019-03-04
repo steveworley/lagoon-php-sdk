@@ -2,7 +2,7 @@
 
 namespace Lagoon\Mutation\Project;
 
-use Lagoon\Mutation\LagoonMutationBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Update a project using the grpahql api.
@@ -43,18 +43,7 @@ mutation {
       }
     }
   ) {
-    name
-    customer {
-      name
-    }
-    openshift {
-      name
-    }
-    gitUrl,
-    activeSystemsDeploy,
-    activeSystemsRemove,
-    branches,
-    pullrequests
+    %s
   }
 }
 QUERY;

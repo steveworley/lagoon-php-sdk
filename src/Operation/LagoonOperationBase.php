@@ -47,11 +47,11 @@ abstract class LagoonOperationBase implements LagoonOperationInterface {
    *
    * @param string $key
    *   The key for the mutation.
-   * @param Lagoon\Mutation\LagoonMutationInterface $mutation
-   *   A valid mutation.
+   * @param string $handler
+   *   A valid mutation class.
    */
-  public function addMutation($key, LagoonMutationInterface $mutation) {
-    $this->mutations[$key] = $mutation;
+  public function addMutation($key, $handler) {
+    $this->mutations[$key] = $handler;
     return $this;
   }
 
@@ -60,29 +60,41 @@ abstract class LagoonOperationBase implements LagoonOperationInterface {
    *
    * @param string $key
    *   The key for the mutation.
-   * @param Lagoon\Mutation\LagoonMutationInterface $mutation
-   *   A valid mutation.
+   * @param string $handler
+   *   A valid mutation class.
    */
-  public function addQuery($key, $query) {
-    $this->queries[$key] = $query;
+  public function addQuery($key, $handler) {
+    $this->queries[$key] = $handler;
     return $this;
   }
 
   /**
    * Fetch the mutation from the configured list.
    *
+   * @param string name
+   *   The class name to fetch.
+   * @param array $variables
+   *   The variables to build.
+   *
    * @return Lagoon\Mutation\LagoonMutationInterface
    */
-  public function mutation($name) {
-    return $this->mutations[$name];
+  public function mutation($name, $variables = []) {
+    $mutation = new $this->mutations[$name]($this->client);
+    return $mutation;
   }
 
   /**
    * Fetch the query from the configured list.
    *
+   * @param string name
+   *   The class name to fetch.
+   * @param array $variables
+   *   The variables to build.
+   *
    * @return Lagoon\Mutation\LagoonMutationInterface
    */
-  public function query($name) {
-    return $this->queries[$name];
+  public function query($name, $variables = []) {
+    $query = new $this->queries[$name]($this->client);
+    return $query->setVariables($variables);
   }
 }

@@ -2,7 +2,7 @@
 
 namespace Lagoon\Query\Project;
 
-use Lagoon\Query\LagoonQueryBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Update a project using the grpahql api.
@@ -12,8 +12,8 @@ class FindByName extends LagoonQueryBase {
   /**
    * {@inheritdoc}
    */
-  protected function validate(array $variables = []) {
-    return true;
+  protected function expectedKeys() {
+    return ['name'];
   }
 
   /**
@@ -21,10 +21,9 @@ class FindByName extends LagoonQueryBase {
    */
   protected function query() {
     return <<<QUERY
-{
-  projectByName(\$name: String) {
-    id
-    name
+query FindByName(\$name: String!) {
+  projectByName(name: \$name) {
+    %s
   }
 }
 QUERY;
