@@ -25,6 +25,16 @@ interface LagoonQueryInterface {
   public function fields(array $fields = []);
 
   /**
+   * Validate the the provided variables.
+   *
+   * This ensures that each mutation can validate the data provided
+   * by the user before issuing the query.
+   *
+   * @throws \Exception
+   */
+  public function validate();
+
+  /**
    * Execute the mutation
    *
    * @return mixed

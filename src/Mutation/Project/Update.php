@@ -7,7 +7,7 @@ use Lagoon\LagoonQueryBase;
 /**
  * Update a project using the grpahql api.
  */
-class Update extends LagoonMutationBase {
+class Update extends LagoonQueryBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class Update extends LagoonMutationBase {
       'openshift',
       'gitUrl',
       'productionEnvironment',
-      'branches'
+      'branches',
     ];
   }
 

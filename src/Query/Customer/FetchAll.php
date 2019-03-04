@@ -21,7 +21,7 @@ class FetchAll extends LagoonQueryBase {
    */
   protected function query() {
     return <<<'QUERY'
-{
+query findAll {
   allCustomers {
     %s
   }
