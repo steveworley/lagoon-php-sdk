@@ -5,7 +5,6 @@ namespace Lagoon\Operation;
 use Lagoon\Operation\LagoonOperationBase;
 use Lagoon\Mutation\Customer\Add;
 use Lagoon\Query\Customer\FetchAll;
-use Lagoon\LagoonResult;
 
 /**
  * Customer graphql operations.
@@ -25,8 +24,8 @@ class Customer extends LagoonOperationBase {
    */
   protected function bind() {
     $this
-      ->addMutation(self::ADD, new Add($this->client))
-      ->addQuery(self::FETCH_ALL, new FetchAll($this->client));
+      ->addMutation(self::ADD, Add::class)
+      ->addQuery(self::FETCH_ALL, FetchAll::class);
   }
 
   /**
@@ -39,8 +38,7 @@ class Customer extends LagoonOperationBase {
    *   The lagoon result object.
    */
   public function add(array $variables = []) {
-    $result = $this->mutation(self::ADD)->execute($variables);
-    return LagoonResult::fromJSON($result);
+    return $this->mutation(self::ADD, $variables);
   }
 
   /**
@@ -50,7 +48,6 @@ class Customer extends LagoonOperationBase {
    *   The lagoon result object.
    */
   public function all() {
-    $result = $this->query(self::FETCH_ALL)->execute([]);
-    return LagoonResult::fromJSON($result);
+    return $this->query(self::FETCH_ALL);
   }
 }

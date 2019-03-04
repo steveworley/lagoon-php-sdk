@@ -2,7 +2,7 @@
 
 namespace Lagoon\Mutation\Project;
 
-use Lagoon\Mutation\LagoonMutationBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Add a project using the graphql api.
@@ -28,29 +28,21 @@ class Add extends LagoonMutationBase {
    */
   protected function query() {
     return <<<QUERY
-mutation {
-  addProject(
-    input: {
-      \$name: String!,
-      \$customer: String!,
-      \$openshift: String!,
-      \$gitUrl: String!,
-      \$productionEnvironment: String!,
-      \$branches: String!
-    }
-  ) {
-    name
-    customer {
-      name
-    }
-    openshift {
-      name
-    }
-    gitUrl,
-    activeSystemsDeploy,
-    activeSystemsRemove,
-    branches,
-    pullrequests
+mutation AddNewProject(
+  \$name: String!
+  \$customer: String!
+  \$opneshift: String!
+  \$productionEnvironment: String!
+  \$branches: String!
+) {
+  addProject(input: {
+    name: \$name,
+    customer: \$customer,
+    openshift: \$openshift,
+    productionEnvironment: \$productionEnvironment,
+    branches: \$branches
+  } ) {
+    %s
   }
 }
 QUERY;

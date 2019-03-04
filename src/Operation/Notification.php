@@ -4,7 +4,6 @@ namespace Lagoon\Operation;
 
 use Lagoon\Operation\LagoonOperationBase;
 use Lagoon\Mutation\Notification\AddSlack;
-use Lagoon\LagoonResult;
 
 /**
  * Notification graphql operations.
@@ -20,7 +19,7 @@ class Notification extends LagoonOperationBase {
    * {@inheritdoc}
    */
   protected function bind() {
-    $this->addMutation(self::ADD_SLACK, new AddSlack($this->client));
+    $this->addMutation(self::ADD_SLACK, AddSlack::class);
   }
 
   /**
@@ -33,7 +32,6 @@ class Notification extends LagoonOperationBase {
    *   The lagoon result object.
    */
   public function addSlack(array $variables = []) {
-    $result = $this->mutation(self::ADD_SLACK)->execute($variables);
-    return LagoonResult::fromJSON($result);
+    return $this->mutation(SELF::ADD_PROJECT, $variables);
   }
 }

@@ -8,17 +8,6 @@ Define the `$endpoint` and `$token` to create a new client instance.
 
 ## Quick Examples
 
-### Fetch all customers
-
-```
-<?php
-
-use Lagoon\LagoonClient;
-
-$client = new LagoonClient($endpoint, $token);
-$customers = $client->customer()->all();
-```
-
 ### Fetch all projects
 
 ```
@@ -27,7 +16,18 @@ $customers = $client->customer()->all();
 use Lagoon\LagoonClient;
 
 $client = new LagoonClient($endpoint, $token);
-$customers = $client->project()->all();
+$customers = $client->customer()->all()->execute();
+```
+
+### Fetch all project names
+
+```
+<?php
+
+use Lagoon\LagoonClient;
+
+$client = new LagoonClient($endpoint, $token);
+$customers = $client->project()->all()->fields(['name'])->execute();
 ```
 
 ### Add a project
@@ -46,5 +46,5 @@ $project = [
   'productEnvironment' => 'master',
   'branches' => 'master',
 ];
-$customers = $client->project()->add();
+$customers = $client->project()->add($project)->execute();
 ```

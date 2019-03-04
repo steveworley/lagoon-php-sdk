@@ -2,7 +2,7 @@
 
 namespace Lagoon\Query\Project;
 
-use Lagoon\Query\LagoonQueryBase;
+use Lagoon\LagoonQueryBase;
 
 /**
  * Find a project by the git url.
@@ -12,8 +12,8 @@ class FindByGit extends LagoonQueryBase {
   /**
    * {@inheritdoc}
    */
-  protected function validate(array $variables = []) {
-    return true;
+  protected function expectedKeys(array $variables = []) {
+    return ['gitUrl'];
   }
 
   /**
@@ -21,10 +21,9 @@ class FindByGit extends LagoonQueryBase {
    */
   protected function query() {
     return <<<QUERY
-{
-  projectByGitUrl(\$gitUrl: String) {
-    id
-    name
+query ProjectByGit(\$gitUrl: string) {
+  projectByGitUrl(gitUrl: \$gitUrl) {
+    %s
   }
 }
 QUERY;
