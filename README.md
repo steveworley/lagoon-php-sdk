@@ -12,7 +12,7 @@ Define the `$endpoint` and `$token` to create a new client instance.
 
 ### Fetch all projects
 
-```
+``` php
 <?php
 
 use Lagoon\LagoonClient;
@@ -23,7 +23,7 @@ $customers = $client->customer()->all()->execute();
 
 ### Fetch all project names
 
-```
+``` php
 <?php
 
 use Lagoon\LagoonClient;
@@ -34,7 +34,7 @@ $customers = $client->project()->all()->fields(['name'])->execute();
 
 ### Add a project
 
-```
+``` php
 <?php
 
 use Lagoon\LagoonClient;
