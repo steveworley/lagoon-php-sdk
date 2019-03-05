@@ -41,15 +41,15 @@ class AddTest extends TestCase {
    */
   public function testQuery() {
     $query = <<<QUERY
-mutation {
-  addProject(
+mutation AddCustomer(\$name: String!, \$privateKey: String!) {
+  addCustomer(
     input: {
-      \$name: String!,
-      \$privateKey: String!,
+      name: \$name
+      privateKey: \$privateKey
     }
   ) {
-    name
-    id
+    %s
+  }
 }
 QUERY;
 

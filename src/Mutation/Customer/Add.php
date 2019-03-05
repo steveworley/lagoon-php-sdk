@@ -24,15 +24,15 @@ class Add extends LagoonQueryBase {
    */
   protected function query() {
     return <<<QUERY
-mutation {
-  addProject(
+mutation AddCustomer(\$name: String!, \$privateKey: String!) {
+  addCustomer(
     input: {
-      \$name: String!,
-      \$privateKey: String!,
+      name: \$name
+      privateKey: \$privateKey
     }
   ) {
-    name
-    id
+    %s
+  }
 }
 QUERY;
   }
