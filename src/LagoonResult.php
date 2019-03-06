@@ -19,7 +19,12 @@ class LagoonResult implements LagoonResultInterface {
    *   The lagoon result object.
    */
   public static function fromJSON($result) {
-    return new self($result);
+    if (is_array($result)) {
+      $data = isset($result['data']) ? reset($result['data']) : [];
+    } else {
+      $data = isset($result->data) ? reset($result->data) : [];
+    }
+    return new self($data);
   }
 
   /**
@@ -33,7 +38,7 @@ class LagoonResult implements LagoonResultInterface {
    */
   public static function fromRaw(Response $response) {
     $data = json_decode($response->getBody()->getContents());
-    return new self($data);
+    return self::fromJSON($data);
   }
 
   /**
@@ -73,6 +78,6 @@ class LagoonResult implements LagoonResultInterface {
    *   The status of the command.
    */
   public function status() {
-    return 0;
+    return count($this->data) >= 1;
   }
 }
