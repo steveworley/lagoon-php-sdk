@@ -50,9 +50,12 @@ jobs:
       - image: circleci/php:7.1-node-browsers
     steps:
       - restore_cache:
-        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - ./
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ./
+
+      - run: sudo apt update
+      - run: sudo docker-php-ext-install zip
 
       # Download and cache dependencies
       - restore_cache:
