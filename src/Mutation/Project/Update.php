@@ -32,11 +32,11 @@ class Update extends LagoonQueryBase {
 mutation {
   addProject(
     input: {
-      \$id: Int,
+      \$id: Int!,
       patch: {
         \$name: String!,
-        \$customer: String!,
-        \$openshift: String!,
+        \$customer: Int!,
+        \$openshift: Int!,
         \$gitUrl: String!,
         \$productionEnvironment: String!,
         \$branches: String!
