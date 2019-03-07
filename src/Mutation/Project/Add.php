@@ -30,8 +30,9 @@ class Add extends LagoonQueryBase {
     return <<<QUERY
 mutation AddNewProject(
   \$name: String!
-  \$customer: String!
-  \$opneshift: String!
+  \$customer: Int!
+  \$openshift: Int!
+  \$gitUrl: String!
   \$productionEnvironment: String!
   \$branches: String!
 ) {
@@ -39,6 +40,7 @@ mutation AddNewProject(
     name: \$name,
     customer: \$customer,
     openshift: \$openshift,
+    gitUrl: \$gitUrl,
     productionEnvironment: \$productionEnvironment,
     branches: \$branches
   } ) {

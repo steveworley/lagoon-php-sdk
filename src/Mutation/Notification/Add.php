@@ -25,21 +25,15 @@ class Add extends LagoonQueryBase {
    */
   protected function query() {
     return <<<QUERY
-mutation AddNewProject(
+mutation AddNotification(
   \$name: String!
-  \$customer: Int!
-  \$openshift: Int!
-  \$gitUrl: String!
-  \$productionEnvironment: String!
-  \$branches: String!
+  \$channel: String!
+  \$webhook: String!
 ) {
   addProject(input: {
     name: \$name,
-    customer: \$customer,
-    openshift: \$openshift,
-    gitUrl: \$gitUrl,
-    productionEnvironment: \$productionEnvironment,
-    branches: \$branches
+    channel: \$channel,
+    webhook: \$webhook,
   } ) {
     %s
   }
