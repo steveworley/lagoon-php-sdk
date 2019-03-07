@@ -12,11 +12,11 @@
   ],
   "require": {
     "php": ">=7",
-    "euautomation/graphql-client": "^0.2.0",
-    "phpunit/phpunit": "^7.5"
+    "euautomation/graphql-client": "^0.2.0"
   },
   "require-dev": {
-    "couscous/couscous": "^1.7"
+    "couscous/couscous": "^1.7",
+    "phpunit/phpunit": "^7.5"
   },
   "scripts": {
     "test": "phpunit"
