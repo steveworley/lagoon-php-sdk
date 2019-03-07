@@ -48,6 +48,16 @@
                                             Home
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="https://steveworley.github.io/lagoon-php-sdk/client.html">
+                                            Client
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://steveworley.github.io/lagoon-php-sdk/response.html">
+                                            Response
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 Operations
@@ -62,6 +72,11 @@
                                                                     <li class="">
                                         <a href="https://steveworley.github.io/lagoon-php-sdk/operations/customer.html">
                                             Customer
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://steveworley.github.io/lagoon-php-sdk/operations/notification.html">
+                                            Notification
                                         </a>
                                     </li>
                                                             </ul>
@@ -100,11 +115,10 @@ $client-&gt;project()-&gt;withGit('my-test-project')-&gt;execute();</code></pre>
   'productionEnvironment' =&gt; 'master',
   'branches' =&gt; 'master'
 ];</code></pre>
-<p><em>Throws</em></p>
-<pre><code>\Exception</code></pre>
 <p><em>Example</em></p>
 <pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
-$client-&gt;project()-&gt;add($project)-&gt;execute();</code></pre>
+$response = $client-&gt;project()-&gt;add($project)-&gt;execute();
+$response-&gt;all();</code></pre>
 <h3><code>update()</code></h3>
 <p>Update a project in Lagoon.</p>
 <p><em>Parameters <code>&lt;array&gt;</code></em></p>
@@ -117,8 +131,6 @@ $client-&gt;project()-&gt;add($project)-&gt;execute();</code></pre>
   'productionEnvironment' =&gt; 'master',
   'branches' =&gt; 'master'
 ];</code></pre>
-<p><em>Throws</em></p>
-<pre><code>\Exception</code></pre>
 <p><em>Example</em></p>
 <pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
 $client-&gt;project()-&gt;udpate($project)-&gt;execute();</code></pre>

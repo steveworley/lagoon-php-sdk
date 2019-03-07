@@ -53,7 +53,7 @@
                                             Client
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://steveworley.github.io/lagoon-php-sdk/response.html">
                                             Response
                                         </a>
@@ -85,31 +85,59 @@
 
                 
                 <section class="col-sm-9 col-lg-10 content">
-                    <h1 id="notification-operations">Notification Operations</h1>
-<p>The SDK supprots mutating notifications that are available in your Lagoon instance.</p>
-<h2 id="mutations">Mutations</h2>
-<h3><code>add()</code></h3>
-<p>Add a notification to Lagoon.</p>
-<p><em>Parameters <code>&lt;array&gt;</code></em></p>
-<pre><code class="language-php">$notification = [
-  'name' =&gt; 'notification-name',
-  'channel' =&gt; 'channel',
-  'webhook' =&gt; 'http://webhook.url',
-];</code></pre>
+                    <h1 id="the-response-object">The Response object</h1>
+<p>Each mutation or query using the operation handlers will return an instance of <code>Lagoon\LagoonResponse</code>. This helps normalise the response from GraphQL to give your application a standard way of access the result of your query or mutation.</p>
+<p>The response object will be returned if the request results in a success or an error.</p>
+<h2 id="accessing-the-results">Accessing the results</h2>
+<p>The results can be accessed with two methods; <code>all</code> or <code>toJson</code>. This provides a uniform way to acces the data as a typical GraphQL response is keyed by the query/mutation that was run. Error handling is taken care of by the <code>LagoonClient</code> and it will construct a response object and it will set the error properties.</p>
+<p><em>Note: If the query or mutation doesn't return anything, <code>all()</code> will return <code>NULL</code> and the Reponse is not treated as an error.</em></p>
+<h3><code>all()</code></h3>
+<p>The <code>all()</code> method on the response object will return all data in a standard <code>json_decoded</code> fashion. This will be an array of standard objects.</p>
 <p><em>Example</em></p>
-<pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
-$client-&gt;notification()-&gt;add($notification)-&gt;execute();</code></pre>
-<h3><code>addToProject()</code></h3>
-<p>Update a project in Lagoon and attach a notification.</p>
-<p><em>Parameters <code>&lt;array&gt;</code></em></p>
-<pre><code class="language-php">$notification = [
-  'notificationType' =&gt; 'SLACK',
-  'project' =&gt; 'my-project',
-  'notificationName' =&gt; 'notificatoin-name',
-];</code></pre>
-<p><em>Example</em></p>
-<pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
-$client-&gt;notification()-&gt;addToProject($notification)-&gt;execute();</code></pre>
+<pre><code class="language-php">$response = $client-&gt;project()-&gt;all()-&gt;execute();
+var_dump($response-&gt;all());
+/**
+array(2) {
+  [0]=&gt;
+  object(stdClass)#36 (1) {
+    ["id"]=&gt;
+    int(1)
+  }
+  [1]=&gt;
+  object(stdClass)#33 (1) {
+    ["id"]=&gt;
+    int(3)
+  }
+}
+*/</code></pre>
+<h3><code>toJson()</code></h3>
+<p>The <code>toJson</code> method will return all data in a serialised JSON format.</p>
+<pre><code class="language-php">$response = $client-&gt;project()-&gt;all()-&gt;execute();
+var_dump($response-&gt;toJson());
+/*
+string(19) "[{"id":1},{"id":2}]"
+*/</code></pre>
+<h3 id="accessing-the-errors">Accessing the errors</h3>
+<p>The errors will range from Guzzle exceptions to GraphQL rejections. Both are treated the same way and have the same interface for accessing data about why the request failed.</p>
+<h3><code>errors()</code></h3>
+<p>Errors are stored as an array on the response object, like the <code>all()</code> method this will return all errors that happened during the request.</p>
+<pre><code class="language-php">$response = $client-&gt;project()-&gt;all()-&gt;execute();
+var_dump($response-&gt;errors());
+/*
+array(1) {
+  [0]=&gt;
+  object(stdClass)#33 (1) {
+    ["message"]=&gt;
+    string(71) "Forbidden - Invalid Auth Token: Error decoding token: invalid signature"
+  }
+}
+*/</code></pre>
+<h3><code>hasErrors()</code></h3>
+<p>This method is a quick way to determine if the response failed and returns a boolean value.</p>
+<pre><code class="language-php">$response = $client-&gt;project()-&gt;all()-&gt;execute();
+if ($response-&gt;hasErrors()) {
+  return;
+}</code></pre>
                 </section>
 
             </div>

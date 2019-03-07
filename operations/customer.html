@@ -48,6 +48,16 @@
                                             Home
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="https://steveworley.github.io/lagoon-php-sdk/client.html">
+                                            Client
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://steveworley.github.io/lagoon-php-sdk/response.html">
+                                            Response
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 Operations
@@ -59,9 +69,14 @@
                                             Project
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://steveworley.github.io/lagoon-php-sdk/operations/customer.html">
                                             Customer
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://steveworley.github.io/lagoon-php-sdk/operations/notification.html">
+                                            Notification
                                         </a>
                                     </li>
                                                             </ul>
@@ -91,8 +106,6 @@ $client-&gt;customer()-&gt;withName('my-customer')-&gt;execute();</code></pre>
   'name' =&gt; 'Customer',
   'privateKey' =&gt; 'key',
 ];</code></pre>
-<p><em>Throws</em></p>
-<pre><code>\Exception</code></pre>
 <p><em>Example</em></p>
 <pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
 $client-&gt;customer()-&gt;add($customer)-&gt;execute();</code></pre>

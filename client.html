@@ -48,7 +48,7 @@
                                             Home
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://steveworley.github.io/lagoon-php-sdk/client.html">
                                             Client
                                         </a>
@@ -85,31 +85,43 @@
 
                 
                 <section class="col-sm-9 col-lg-10 content">
-                    <h1 id="notification-operations">Notification Operations</h1>
-<p>The SDK supprots mutating notifications that are available in your Lagoon instance.</p>
-<h2 id="mutations">Mutations</h2>
-<h3><code>add()</code></h3>
-<p>Add a notification to Lagoon.</p>
-<p><em>Parameters <code>&lt;array&gt;</code></em></p>
-<pre><code class="language-php">$notification = [
-  'name' =&gt; 'notification-name',
-  'channel' =&gt; 'channel',
-  'webhook' =&gt; 'http://webhook.url',
-];</code></pre>
-<p><em>Example</em></p>
-<pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
-$client-&gt;notification()-&gt;add($notification)-&gt;execute();</code></pre>
-<h3><code>addToProject()</code></h3>
-<p>Update a project in Lagoon and attach a notification.</p>
-<p><em>Parameters <code>&lt;array&gt;</code></em></p>
-<pre><code class="language-php">$notification = [
-  'notificationType' =&gt; 'SLACK',
-  'project' =&gt; 'my-project',
-  'notificationName' =&gt; 'notificatoin-name',
-];</code></pre>
-<p><em>Example</em></p>
-<pre><code class="language-php">$client = new LagoonClient($endpoint, $token);
-$client-&gt;notification()-&gt;addToProject($notification)-&gt;execute();</code></pre>
+                    <h1 id="the-client-object">The client object</h1>
+<p>The client object is built on the <code>euautomation/graphql-client</code> GraphQL client. Normally the operations will access the client implicitly and return the responses to your application; however if an operation isn't supported you can use the client directly to make requests to graphql.</p>
+<h2 id="request-methods">Request methods</h2>
+<h3><code>raw()</code></h3>
+<p>The raw method will return a Guzzle Response object without any additional parsing.</p>
+<p><em>Params</em></p>
+<ul>
+<li><code>query&lt;string&gt;</code>: The query string to send to Lagoon</li>
+<li><code>variables[array]</code>: Any variables to use as replacements in the graphql query</li>
+</ul>
+<pre><code class="language-php">$client-&gt;raw($query, $variables);</code></pre>
+<h3><code>json()</code></h3>
+<p>The json method will parse the Guzzle response and return a serialised json object.</p>
+<p><em>Params</em></p>
+<ul>
+<li><code>query&lt;string&gt;</code>: The query string to send to Lagoon</li>
+<li><code>variables[array]</code>: Any variables to use as replacements in the graphql query</li>
+</ul>
+<pre><code class="language-php">$client-&gt;json($query, $variables);</code></pre>
+<h3><code>response()</code></h3>
+<p>The response method will return a <code>Lagoon\LagoonResponse</code> object and does additional filtering on the data.</p>
+<p><em>Params</em></p>
+<ul>
+<li><code>query&lt;string&gt;</code>: The query string to send to Lagoon</li>
+<li><code>variables&lt;array&gt;</code>: Any variables to use as replacements in the graphql query</li>
+</ul>
+<pre><code class="language-php">$client-&gt;response($query, $variables);</code></pre>
+<h2 id="headers">Headers</h2>
+<p>The Client object maintains a list of headers that it should send with each request. This list can be modified directly after a client has be instantiated.</p>
+<p><em>Note: The headers will be present to each request, both manual and operations to have different headers for different request you will need to create another instance of the client</em></p>
+<h3><code>addHeader()</code></h3>
+<p>Add a header to the request.</p>
+<p><em>Params</em></p>
+<ul>
+<li><code>key&lt;string&gt;</code>: The header name</li>
+<li><code>value&lt;string&gt;</code>: The header value</li>
+</ul>
                 </section>
 
             </div>
