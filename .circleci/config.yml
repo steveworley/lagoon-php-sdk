@@ -44,10 +44,25 @@ jobs:
             - ./vendor
 
   test:
+    docker:
+      - image: circleci/php:7.1-node-browsers
+    steps:
+      - restore_cache:
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - ./
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
 
   deploy-docs:
+    docker:
+      - image: circleci/php:7.1-node-browsers
+    steps:
+      - restore_cache:
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - ./
+
       # run documentation build
       - run: ./vendor/bin/couscous deploy
 
