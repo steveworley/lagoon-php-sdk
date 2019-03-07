@@ -36,8 +36,8 @@ class Customer extends LagoonOperationBase {
    * @param array $variables
    *   A list of variables to add.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
   public function add(array $variables = []) {
     return $this->mutation(self::ADD, $variables);
@@ -46,8 +46,8 @@ class Customer extends LagoonOperationBase {
   /**
    * Fetch all projects from the API.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
   public function all() {
     return $this->query(self::FETCH_ALL);

@@ -63,7 +63,7 @@ abstract class LagoonQueryBase implements LagoonQueryInterface {
   }
 
   /**
-   * Set the variables for this instance.
+   * {@inheritdoc}
    */
   public function setVariables($variables = []) {
     $this->variables = $variables;
@@ -71,26 +71,23 @@ abstract class LagoonQueryBase implements LagoonQueryInterface {
   }
 
   /**
-   * Get the assigned variables.
+   * {@inheritdoc}
    */
   public function getVariables() {
     return $this->variables;
   }
 
   /**
-   * The fields the query should return.
-   *
-   * @param array $fields
-   *   A list of fields to add to the query.
-   *
-   * @return array
-   *   An array of field names.
+   * {@inheritdoc}
    */
   final public function fields(array $fields = []) {
     $this->fieldList = $fields;
     return $this;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   final public function getQuery() {
     return sprintf($this->query(), implode(',', $this->fieldList));
   }

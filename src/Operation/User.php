@@ -28,8 +28,8 @@ class User extends LagoonOperationBase {
    * @param array $variables
    *   A list of variables to add.
    *
-   * @return Lagoon\LagoonResult
-   *   The lagoon result object.
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
    */
   public function withKey($key = '') {
     return $this->query(SELF::UsersBySshKey, ['sshKey' => $key]);
