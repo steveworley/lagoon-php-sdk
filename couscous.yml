@@ -3,8 +3,7 @@
 # See: http://couscous.io
 
 # Base URL of the published website
-baseUrl: https://github.com/steveworley/lagoon-php-sdk
-
+baseUrl: https://steveworley.github.io/lagoon-php-sdk
 
 template:
   url: https://github.com/pnowy/CouscousNativeTemplate
