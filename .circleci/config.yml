@@ -49,10 +49,9 @@ jobs:
     docker:
       - image: circleci/php:7.1-node-browsers
     steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ./
+      - checkout
+      - run: git config --global user.email "$GIT_AUTHOR_EMAIL"
+      - run: git config --global user.name "$GIT_AUTHOR_NAME"
 
       - run: sudo apt update
       - run: sudo docker-php-ext-install zip
@@ -85,8 +84,3 @@ workflows:
             - setup
       # Only deploy docs on master.
       - deploy-docs:
-          requires:
-            - setup
-          filters:
-            branches:
-              only: master
