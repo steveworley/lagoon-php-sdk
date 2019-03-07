@@ -80,7 +80,7 @@ abstract class LagoonOperationBase implements LagoonOperationInterface {
    */
   public function mutation($name, $variables = []) {
     $mutation = new $this->mutations[$name]($this->client);
-    return $mutation;
+    return $mutation->setVariables($variables);
   }
 
   /**

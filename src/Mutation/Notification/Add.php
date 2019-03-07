@@ -25,18 +25,22 @@ class Add extends LagoonQueryBase {
    */
   protected function query() {
     return <<<QUERY
-mutation AddSlackNotification(
+mutation AddNewProject(
   \$name: String!
-  \$channel: String!
-  \$webhook: String!
+  \$customer: Int!
+  \$openshift: Int!
+  \$gitUrl: String!
+  \$productionEnvironment: String!
+  \$branches: String!
 ) {
-  addNotificationSlack(
-    input: {
-      name: \$name
-      channel: \$channel
-      webhook: \$webhook
-    }
-  ) {
+  addProject(input: {
+    name: \$name,
+    customer: \$customer,
+    openshift: \$openshift,
+    gitUrl: \$gitUrl,
+    productionEnvironment: \$productionEnvironment,
+    branches: \$branches
+  } ) {
     %s
   }
 }
