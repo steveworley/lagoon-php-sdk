@@ -16,7 +16,7 @@ jobs:
           paths:
             - ./
 
-  test:
+  build:
     docker:
       - image: circleci/php:7.1-node-browsers
     steps:
@@ -80,13 +80,10 @@ workflows:
       - build:
           requires:
             - setup
-      - test:
-          requires:
-            - build
       # Only deploy docs on master.
       - deploy-docs:
           requires:
-            - build
+            - setup
           filters:
             branches:
               only: master
