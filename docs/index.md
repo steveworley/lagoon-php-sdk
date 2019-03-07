@@ -1,5 +1,5 @@
 ---
-currentMenu: gettingstarted
+currentMenu: home
 ---
 
 The Lagoon PHP SDK enables PHP developers to interact easily with the Lagoon GraphQL API in their PHP applications.

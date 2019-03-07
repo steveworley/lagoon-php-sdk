@@ -23,6 +23,12 @@ menu:
         home:
           text: Home
           relativeUrl:
+        client:
+          text: Client
+          relativeUrl: client.html
+        response:
+          text: Response
+          relativeUrl: response.html
     operations:
       name: Operations
       items:
@@ -32,3 +38,6 @@ menu:
         operationsCustomer:
           text: Customer
           relativeUrl: operations/customer.html
+        operationsNotifications:
+          text: Notification
+          relativeUrl: operations/notification.html

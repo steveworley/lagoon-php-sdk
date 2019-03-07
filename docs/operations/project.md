@@ -60,17 +60,12 @@ $project = [
 ];
 ```
 
-*Throws*
-
-```
-\Exception
-```
-
 *Example*
 
 ```php
 $client = new LagoonClient($endpoint, $token);
-$client->project()->add($project)->execute();
+$response = $client->project()->add($project)->execute();
+$response->all();
 ```
 
 ### `update()`
@@ -89,12 +84,6 @@ $project = [
   'productionEnvironment' => 'master',
   'branches' => 'master'
 ];
-```
-
-*Throws*
-
-```
-\Exception
 ```
 
 *Example*

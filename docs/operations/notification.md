@@ -1,8 +1,8 @@
 ---
-currentMenu: operationsProject
+currentMenu: operationsNotification
 ---
 
-# Project Operations
+# Notification Operations
 
 The SDK supprots mutating notifications that are available in your Lagoon instance.
 
@@ -20,12 +20,6 @@ $notification = [
   'channel' => 'channel',
   'webhook' => 'http://webhook.url',
 ];
-```
-
-*Throws*
-
-```
-\Exception
 ```
 
 *Example*
@@ -47,12 +41,6 @@ $notification = [
   'project' => 'my-project',
   'notificationName' => 'notificatoin-name',
 ];
-```
-
-*Throws*
-
-```
-\Exception
 ```
 
 *Example*

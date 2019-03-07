@@ -1,5 +1,5 @@
 ---
-currentMenu: operationsCustomers
+currentMenu: operationsCustomer
 ---
 
 # Customer Operations
@@ -43,12 +43,6 @@ $customer = [
   'name' => 'Customer',
   'privateKey' => 'key',
 ];
-```
-
-*Throws*
-
-```
-\Exception
 ```
 
 *Example*

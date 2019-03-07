@@ -6,6 +6,12 @@ The *Lagoon SDK for PHP* makes it easy for developers to connect their applicati
 
 ## Getting started
 
+Require the package using compsoer.
+
+```
+composer require steveworley/lagoon-php-sdk
+```
+
 Define the `$endpoint` and `$token` to create a new client instance.
 
 ## Quick Examples
