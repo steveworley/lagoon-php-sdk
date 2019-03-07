@@ -34,9 +34,9 @@ mutation AddSlackNotification(
 ) {
   addNotificationSlack(
     input: {
-      name: \$notificationType
-      channel: \$project
-      webhook: \$notificationName
+      notificationType: \$notificationType
+      project: \$project
+      notificationName: \$notificationName
     }
   ) {
     %s
