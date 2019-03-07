@@ -3,6 +3,8 @@
 namespace Lagoon;
 
 use EUAutomation\GraphQL\Client;
+use EUAutomation\GraphQL\Response;
+use GuzzleHttp\Exception\ClientException;
 
 /**
  * The LagoonClient.
@@ -49,6 +51,20 @@ class LagoonClient implements LagoonClientInterface {
    */
   public function raw($query, array $variables = []) {
     return $this->client->raw($query, $variables, $this->headers);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function response($query, array $variables = []) {
+    try {
+      $response = $this->client->response($query, $variables, $this->headers);
+    } catch (ClientException $error) {
+      $data = $error->getResponse();
+      $data = json_decode($data->getBody()->getContents());
+      $response = new Response($data);
+    }
+    return $response;
   }
 
   /**

@@ -13,6 +13,18 @@ interface LagoonClientInterface {
   public function __construct($endpoint,$token);
 
   /**
+   * Return a response object from graphql.
+   *
+   * @param string $query
+   *   The query to send to Grpahql.
+   * @param array $variables
+   *   The variables to replace in the grpahql query.
+   *
+   * @return EUAutomation\GraphQL\Response
+   */
+  public function response($query, array $variables = []);
+
+  /**
    * Return the raw guzzle response.
    *
    * @param string $query

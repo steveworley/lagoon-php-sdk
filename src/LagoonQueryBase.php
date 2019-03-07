@@ -100,6 +100,6 @@ abstract class LagoonQueryBase implements LagoonQueryInterface {
    */
   final public function execute() {
     $this->validate();
-    return LagoonResult::fromJSON($this->client->json($this-> getQuery(), $this->variables));
+    return $this->client->response($this-> getQuery(), $this->variables);
   }
 }
