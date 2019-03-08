@@ -22,7 +22,7 @@ class Environment extends LagoonOperationBase {
    */
   protected function bind() {
     $this
-      ->addQuery(self:: FIND_BY_OPENSHIFT, FindByOpenshiftProject::class)
+      ->addQuery(self::FIND_BY_OPENSHIFT, FindByOpenshiftProject::class)
       ->addMutation(self::ADD_VAR, AddVariable::class);
   }
 
@@ -36,7 +36,7 @@ class Environment extends LagoonOperationBase {
    *   The lagoon query object.
    */
   public function withOpenshiftProject($name) {
-    return $this->query(SELF::UsersBySshKey, ['openshiftProjectName' => $name]);
+    return $this->query(SELF::FIND_BY_OPENSHIFT, ['openshiftProjectName' => $name]);
   }
 
   /**

@@ -10,16 +10,14 @@ class AddVariableTest extends TestCase {
 
   protected $client;
 
-  public function callMethod($obj, $name, array $args = [])
-  {
+  public function callMethod($obj, $name, array $args = []) {
     $class = new \ReflectionClass($obj);
     $method = $class->getMethod($name);
     $method->setAccessible(true);
     return $method->invokeArgs(new $obj($this->client), $args);
   }
 
-  public function setup()
-  {
+  public function setup() {
     $client = $this->getMockBuilder(LagoonClient::class)
       ->disableOriginalConstructor()
       ->getMock();
@@ -27,8 +25,7 @@ class AddVariableTest extends TestCase {
     $this->client = $client;
   }
 
-  public function testExpectedKeys()
-  {
+  public function testExpectedKeys() {
     $expected_keys = $this->callMethod(AddVariable::class, 'expectedKeys');
     $this->assertEquals([
       'type',
@@ -39,13 +36,12 @@ class AddVariableTest extends TestCase {
     ], $expected_keys);
   }
 
-  public function testQuery()
-  {
+  public function testQuery() {
     $query = <<<QUERY
 mutation AddEnvironmentVar(
-  \$type: String!
+  \$type: EnvVariableType!
   \$typeId: Int!
-  \$scope: String!
+  \$scope: EnvVariableScope!
   \$name: String!
   \$value: String!
 ) {

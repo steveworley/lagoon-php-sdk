@@ -52,7 +52,7 @@ class FindByOpenshiftProjectTest extends TestCase {
    */
   public function testQuery() {
     $query = <<<QUERY
-query EnvironmentByOpenshiftProjectName(\$openshiftProjectName: string) {
+query EnvironmentByOpenshiftProjectName(\$openshiftProjectName: String!) {
   environmentByOpenshiftProjectName(openshiftProjectName: \$openshiftProjectName) {
     %s
   }

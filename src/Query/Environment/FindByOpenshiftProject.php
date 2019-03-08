@@ -21,7 +21,7 @@ class FindByOpenshiftProject extends LagoonQueryBase {
    */
   protected function query() {
     return <<<QUERY
-query EnvironmentByOpenshiftProjectName(\$openshiftProjectName: string) {
+query EnvironmentByOpenshiftProjectName(\$openshiftProjectName: String!) {
   environmentByOpenshiftProjectName(openshiftProjectName: \$openshiftProjectName) {
     %s
   }

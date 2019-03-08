@@ -29,9 +29,9 @@ class AddVariable extends LagoonQueryBase {
   {
     return <<<QUERY
 mutation AddEnvironmentVar(
-  \$type: String!
+  \$type: EnvVariableType!
   \$typeId: Int!
-  \$scope: String!
+  \$scope: EnvVariableScope!
   \$name: String!
   \$value: String!
 ) {

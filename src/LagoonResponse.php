@@ -42,6 +42,13 @@ class LagoonResponse {
   /**
    * {@inheritdoc}
    */
+  public function first() {
+    return is_array($this->data) ? reset($this->data) : $this->data;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function errors() {
     return $this->errors;
   }
