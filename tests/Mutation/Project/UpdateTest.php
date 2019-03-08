@@ -62,17 +62,25 @@ class UpdateTest extends TestCase {
    */
   public function testQuery() {
     $query = <<<QUERY
-mutation {
-  addProject(
+mutation UpdateProjectMutation(
+  \$id: Int!
+  \$name: String!
+  \$customer: Int!
+  \$openshift: Int!
+  \$gitUrl: String!
+  \$productionEnvironment: String!
+  \$branches: String!
+) {
+  updateProject(
     input: {
-      \$id: Int!,
+      id: \$id,
       patch: {
-        \$name: String!,
-        \$customer: Int!,
-        \$openshift: Int!,
-        \$gitUrl: String!,
-        \$productionEnvironment: String!,
-        \$branches: String!
+        name: \$name,
+        customer: \$customer,
+        openshift: \$openshift,
+        gitUrl: \$gitUrl,
+        productionEnvironment: \$productionEnvironment,
+        branches: \$branches
       }
     }
   ) {
