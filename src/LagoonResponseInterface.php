@@ -17,6 +17,11 @@ interface LagoonResponseInterface {
   public function all();
 
   /**
+   * Return the first object in the response.
+   */
+  public function first();
+
+  /**
    * Return all errors associated with this response.
    *
    * @return array|null
