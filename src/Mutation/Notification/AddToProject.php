@@ -12,8 +12,7 @@ class AddToProject extends LagoonQueryBase {
   /**
    * {@inheritdoc}
    */
-  protected function expectedKeys()
-  {
+  protected function expectedKeys() {
     return [
       'notificationType',
       'project',
@@ -24,15 +23,14 @@ class AddToProject extends LagoonQueryBase {
   /**
    * {@inheritdoc}
    */
-  protected function query()
-  {
+  protected function query() {
     return <<<QUERY
-mutation AddSlackNotification(
-  \$notificationType: String!
+mutation AddNotificationToProject(
+  \$notificationType: NotificationType!
   \$project: String!
   \$notificationName: String!
 ) {
-  addNotificationSlack(
+  addNotificationToProject(
     input: {
       notificationType: \$notificationType
       project: \$project

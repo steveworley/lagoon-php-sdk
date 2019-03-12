@@ -36,12 +36,12 @@ class AddToProjectTest extends TestCase {
 
   public function testQuery() {
     $query = <<<QUERY
-mutation AddSlackNotification(
-  \$notificationType: String!
+mutation AddNotificationToProject(
+  \$notificationType: NotificationType!
   \$project: String!
   \$notificationName: String!
 ) {
-  addNotificationSlack(
+  addNotificationToProject(
     input: {
       notificationType: \$notificationType
       project: \$project
