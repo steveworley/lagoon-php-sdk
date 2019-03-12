@@ -83,4 +83,7 @@ workflows:
           requires:
             - setup
       # Only deploy docs on master.
-      - deploy-docs
+      - deploy-docs:
+          filters:
+            branches:
+              only: master
