@@ -5,6 +5,7 @@ namespace Lagoon\Operation;
 use Lagoon\Operation\LagoonOperationBase;
 use Lagoon\Mutation\Project\Add;
 use Lagoon\Mutation\Project\Update;
+use Lagoon\Mutation\Project\DeployBranch;
 use Lagoon\Query\Project\FetchAll;
 use Lagoon\Query\Project\FindByName;
 use Lagoon\Query\Project\FindByGit;
@@ -19,6 +20,7 @@ class Project extends LagoonOperationBase {
    */
   const ADD_PROJECT = 'add';
   const UPDATE_PROJECT = 'update';
+  const DEPLOY_BRANCH = 'deployBranch';
   const FETCH_BY_NAME = 'name';
   const FETCH_ALL = 'all';
   const FETCH_BY_GIT = 'git';
@@ -30,6 +32,7 @@ class Project extends LagoonOperationBase {
     $this
       ->addMutation(self::ADD_PROJECT, Add::class)
       ->addMutation(self::UPDATE_PROJECT, Update::class)
+      ->addMutation(self::DEPLOY_BRANCH, DeployBranch::class)
       ->addQuery(self::FETCH_BY_NAME, FindByName::class)
       ->addQuery(self::FETCH_ALL, FetchAll::class)
       ->addQuery(self::FETCH_BY_GIT, FindByGit::class);
@@ -59,6 +62,19 @@ class Project extends LagoonOperationBase {
    */
   public function update(array $variables = []) {
     return $this->mutation(SELF::UPDATE_PROJECT, $variables);
+  }
+
+  /**
+   * Execute the project deployment mutation.
+   *
+   * @param array $variables
+   *   A project and branch to deploy.
+   *
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
+   */
+  public function deployBranch(array $variables = []) {
+    return $this->mutation(SELF::DEPLOY_BRANCH, $variables);
   }
 
   /**
