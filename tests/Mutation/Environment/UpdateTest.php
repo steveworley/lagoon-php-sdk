@@ -39,7 +39,12 @@ mutation UpdateEnvironment(
   \$id: Int!
   \$patch: UpdateEnvironmentPatchInput!
 ) {
-  %s
+  updateEnvironment(input: {
+    id: \$id
+    patch: \$patch
+  }) {
+    %s
+  }
 }
 QUERY;
 
