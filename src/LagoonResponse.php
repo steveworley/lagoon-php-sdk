@@ -57,7 +57,7 @@ class LagoonResponse {
    * {@inheritdoc}
    */
   public function hasErrors() {
-    return (bool) count($this->errors);
+    return is_array($this->errors) && (bool) count($this->errors);
   }
 
   /**

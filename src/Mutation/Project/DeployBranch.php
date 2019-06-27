@@ -35,9 +35,7 @@ mutation DeployProjectBranchMutation(
       }
       branchName: \$projectBranch
     }
-  ) {
-    %s
-  }
+  )
 }
 QUERY;
   }
