@@ -8,6 +8,7 @@ use Lagoon\Mutation\Environment\AddVariable;
 use Lagoon\Mutation\Environment\DeleteVariable;
 use Lagoon\Mutation\Environment\Delete;
 use Lagoon\Mutation\Environment\Update;
+use Lagoon\Query\Environment\All;
 
 /**
  * Notification graphql operations.
@@ -17,6 +18,7 @@ class Environment extends LagoonOperationBase {
   /**
    * Naming constants to use throughout the class.
    */
+  const ALL = 'all';
   const FIND_BY_OPENSHIFT = 'find_by_openshift';
   const ADD_VAR = 'add_var';
   const DELETE_VAR = 'delete_var';
@@ -28,6 +30,7 @@ class Environment extends LagoonOperationBase {
    */
   protected function bind() {
     $this
+      ->addQuery(self::ALL, All::class)
       ->addQuery(self::FIND_BY_OPENSHIFT, FindByOpenshiftProject::class)
       ->addMutation(self::ADD_VAR, AddVariable::class)
       ->addMutation(self::DELETE_VAR, DeleteVariable::class)
@@ -36,7 +39,17 @@ class Environment extends LagoonOperationBase {
   }
 
   /**
-   * Execute the openshift projectn ame query.
+   * Fetch all environments from Lagoon.
+   *
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
+   */
+  public function all() {
+    return $this->query(self::ALL);
+  }
+
+  /**
+   * Execute the openshift project name query.
    *
    * @param string $name
    *   The project name.
