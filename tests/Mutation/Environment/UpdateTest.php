@@ -26,7 +26,7 @@ class UpdateTest extends TestCase {
   }
 
   public function testExpectedKeys() {
-    $expected_keys = $this->callMethod(AddVariable::class, 'expectedKeys');
+    $expected_keys = $this->callMethod(Update::class, 'expectedKeys');
     $this->assertEquals([
       'id',
       'patch',
@@ -48,7 +48,7 @@ mutation UpdateEnvironment(
 }
 QUERY;
 
-    $called = $this->callMethod(AddVariable::class, 'query');
+    $called = $this->callMethod(Update::class, 'query');
     $this->assertEquals($query, $called);
   }
 

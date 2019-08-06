@@ -36,12 +36,12 @@ class AddTest extends TestCase {
 
   public function testQuery() {
     $query = <<<QUERY
-mutation AddNotification(
+mutation AddNotificationSlack(
   \$name: String!
   \$channel: String!
   \$webhook: String!
 ) {
-  addProject(input: {
+  addNotificationSlack(input: {
     name: \$name,
     channel: \$channel,
     webhook: \$webhook,
