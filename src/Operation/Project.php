@@ -6,6 +6,7 @@ use Lagoon\Operation\LagoonOperationBase;
 use Lagoon\Mutation\Project\Add;
 use Lagoon\Mutation\Project\Update;
 use Lagoon\Mutation\Project\DeployBranch;
+use Lagoon\Mutation\Project\DeployEnvironmentLatest;
 use Lagoon\Query\Project\FetchAll;
 use Lagoon\Query\Project\FindByName;
 use Lagoon\Query\Project\FindByGit;
@@ -21,6 +22,7 @@ class Project extends LagoonOperationBase {
   const ADD_PROJECT = 'add';
   const UPDATE_PROJECT = 'update';
   const DEPLOY_BRANCH = 'deployBranch';
+  const DEPLOY_ENVIRONMENT_LATEST = 'deployEnvironmentLatest';
   const FETCH_BY_NAME = 'name';
   const FETCH_ALL = 'all';
   const FETCH_BY_GIT = 'git';
@@ -33,6 +35,7 @@ class Project extends LagoonOperationBase {
       ->addMutation(self::ADD_PROJECT, Add::class)
       ->addMutation(self::UPDATE_PROJECT, Update::class)
       ->addMutation(self::DEPLOY_BRANCH, DeployBranch::class)
+      ->addMutation(self::DEPLOY_ENVIRONMENT_LATEST, DeployEnvironmentLatest::class)
       ->addQuery(self::FETCH_BY_NAME, FindByName::class)
       ->addQuery(self::FETCH_ALL, FetchAll::class)
       ->addQuery(self::FETCH_BY_GIT, FindByGit::class);
@@ -75,6 +78,19 @@ class Project extends LagoonOperationBase {
    */
   public function deployBranch(array $variables = []) {
     return $this->mutation(SELF::DEPLOY_BRANCH, $variables);
+  }
+
+  /**
+   * Execute the environment deployment mutation.
+   *
+   * @param array $variables
+   *   A project and branch to deploy.
+   *
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
+   */
+  public function deployEnvironmentLatest(array $variables = []) {
+    return $this->mutation(SELF::DEPLOY_ENVIRONMENT_LATEST, $variables);
   }
 
   /**
