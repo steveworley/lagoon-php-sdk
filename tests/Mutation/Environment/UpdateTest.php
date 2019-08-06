@@ -1,12 +1,12 @@
 <?php
 
-namespace Lagoon\Test\Mutation\Notification;
+namespace Lagoon\Test\Mutation\Environment;
 
 use PHPUnit\Framework\TestCase;
-use Lagoon\Mutation\Notification\Add;
+use Lagoon\Mutation\Environment\Update;
 use Lagoon\LagoonClient;
 
-class AddTest extends TestCase {
+class UpdateTest extends TestCase {
 
   protected $client;
 
@@ -26,32 +26,30 @@ class AddTest extends TestCase {
   }
 
   public function testExpectedKeys() {
-    $expected_keys = $this->callMethod(Add::class, 'expectedKeys');
+    $expected_keys = $this->callMethod(Update::class, 'expectedKeys');
     $this->assertEquals([
-      'name',
-      'channel',
-      'webhook',
+      'id',
+      'patch',
     ], $expected_keys);
   }
 
   public function testQuery() {
-    $query = <<<QUERY
-mutation AddNotificationSlack(
-  \$name: String!
-  \$channel: String!
-  \$webhook: String!
+    $query =<<<QUERY
+mutation UpdateEnvironment(
+  \$id: Int!
+  \$patch: UpdateEnvironmentPatchInput!
 ) {
-  addNotificationSlack(input: {
-    name: \$name,
-    channel: \$channel,
-    webhook: \$webhook,
-  } ) {
+  updateEnvironment(input: {
+    id: \$id
+    patch: \$patch
+  }) {
     %s
   }
 }
 QUERY;
 
-    $called = $this->callMethod(Add::class, 'query');
+    $called = $this->callMethod(Update::class, 'query');
     $this->assertEquals($query, $called);
   }
+
 }

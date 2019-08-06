@@ -1,15 +1,23 @@
 <?php
 
-namespace Lagoon\Test\Mutation\Notification;
+namespace Lagoon\Test\Query\Environment;
 
 use PHPUnit\Framework\TestCase;
-use Lagoon\Mutation\Notification\Add;
+use Lagoon\Query\Environment\All;
 use Lagoon\LagoonClient;
 
-class AddTest extends TestCase {
+class AllTest extends TestCase {
 
+  /**
+   * The client.
+   *
+   * @var Lagoon\LagoonClient
+   */
   protected $client;
 
+  /**
+   * Reflection method call.
+   */
   public function callMethod($obj, $name, array $args = []) {
     $class = new \ReflectionClass($obj);
     $method = $class->getMethod($name);
@@ -17,6 +25,9 @@ class AddTest extends TestCase {
     return $method->invokeArgs(new $obj($this->client), $args);
   }
 
+  /**
+   * Set up the test case.
+   */
   public function setup() {
     $client = $this->getMockBuilder(LagoonClient::class)
       ->disableOriginalConstructor()
@@ -25,33 +36,28 @@ class AddTest extends TestCase {
     $this->client = $client;
   }
 
+  /**
+   * Test that the expected keys match.
+   */
   public function testExpectedKeys() {
-    $expected_keys = $this->callMethod(Add::class, 'expectedKeys');
-    $this->assertEquals([
-      'name',
-      'channel',
-      'webhook',
-    ], $expected_keys);
+    $expected_keys = $this->callMethod(All::class, 'expectedKeys');
+    $this->assertEquals([], $expected_keys);
   }
 
+  /**
+   * Test that the query matche what is expected.
+   */
   public function testQuery() {
-    $query = <<<QUERY
-mutation AddNotificationSlack(
-  \$name: String!
-  \$channel: String!
-  \$webhook: String!
-) {
-  addNotificationSlack(input: {
-    name: \$name,
-    channel: \$channel,
-    webhook: \$webhook,
-  } ) {
+    $query = <<<'QUERY'
+query findAll {
+  allEnvironments {
     %s
   }
 }
 QUERY;
 
-    $called = $this->callMethod(Add::class, 'query');
+    $called = $this->callMethod(All::class, 'query');
     $this->assertEquals($query, $called);
   }
+
 }
