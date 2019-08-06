@@ -15,12 +15,6 @@ class Update extends LagoonQueryBase {
   protected function expectedKeys() {
     return [
       'id',
-      'name',
-      'customer',
-      'openshift',
-      'gitUrl',
-      'productionEnvironment',
-      'branches',
     ];
   }
 
@@ -31,12 +25,21 @@ class Update extends LagoonQueryBase {
     return <<<QUERY
 mutation UpdateProjectMutation(
   \$id: Int!
-  \$name: String!
-  \$customer: Int!
-  \$openshift: Int!
-  \$gitUrl: String!
-  \$productionEnvironment: String!
-  \$branches: String!
+  \$name: String
+  \$customer: Int
+  \$openshift: Int
+  \$gitUrl: String
+  \$productionEnvironment: String
+  \$branches: String
+  \$subfolder: String
+  \$activeSystemsDeploy: String
+  \$activeSystemsRemove: String
+  \$activeSystemsTask: String
+  \$autoIdle: Int
+  \$storageCalc: Int
+  \$pullrequests: String
+  \$openshiftProjectPattern: String
+  \$developmentEnvironmentsLimit: Int
 ) {
   updateProject(
     input: {
@@ -48,6 +51,15 @@ mutation UpdateProjectMutation(
         gitUrl: \$gitUrl,
         productionEnvironment: \$productionEnvironment,
         branches: \$branches
+        subfolder: \$subfolder
+        activeSystemsDeploy: \$activeSystemsDeploy
+        activeSystemsRemove: \$activeSystemsRemove
+        activeSystemsTask: \$activeSystemsTask
+        autoIdle: \$autoIdle
+        storageCalc: \$storageCalc
+        pullrequests: \$pullrequests
+        openshiftProjectPattern: \$openshiftProjectPattern
+        developmentEnvironmentsLimit: \$developmentEnvironmentsLimit
       }
     }
   ) {
