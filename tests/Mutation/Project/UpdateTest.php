@@ -71,7 +71,6 @@ mutation UpdateProjectMutation(
   \$autoIdle: Int
   \$storageCalc: Int
   \$pullrequests: String
-  \$openshift: Int
   \$openshiftProjectPattern: String
   \$developmentEnvironmentsLimit: Int
 ) {
@@ -92,7 +91,6 @@ mutation UpdateProjectMutation(
         autoIdle: \$autoIdle
         storageCalc: \$storageCalc
         pullrequests: \$pullrequests
-        openshift: \$openshift
         openshiftProjectPattern: \$openshiftProjectPattern
         developmentEnvironmentsLimit: \$developmentEnvironmentsLimit
       }
