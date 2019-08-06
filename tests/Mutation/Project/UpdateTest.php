@@ -48,12 +48,6 @@ class UpdateTest extends TestCase {
     $expected_keys = $this->callMethod(Update::class, 'expectedKeys');
     $this->assertEquals([
       'id',
-      'name',
-      'customer',
-      'openshift',
-      'gitUrl',
-      'productionEnvironment',
-      'branches',
     ], $expected_keys);
   }
 
@@ -64,12 +58,22 @@ class UpdateTest extends TestCase {
     $query = <<<QUERY
 mutation UpdateProjectMutation(
   \$id: Int!
-  \$name: String!
-  \$customer: Int!
-  \$openshift: Int!
-  \$gitUrl: String!
-  \$productionEnvironment: String!
-  \$branches: String!
+  \$name: String
+  \$customer: Int
+  \$openshift: Int
+  \$gitUrl: String
+  \$productionEnvironment: String
+  \$branches: String
+  \$subfolder: String
+  \$activeSystemsDeploy: String
+  \$activeSystemsRemove: String
+  \$activeSystemsTask: String
+  \$autoIdle: Int
+  \$storageCalc: Int
+  \$pullrequests: String
+  \$openshift: Int
+  \$openshiftProjectPattern: String
+  \$developmentEnvironmentsLimit: Int
 ) {
   updateProject(
     input: {
@@ -81,6 +85,16 @@ mutation UpdateProjectMutation(
         gitUrl: \$gitUrl,
         productionEnvironment: \$productionEnvironment,
         branches: \$branches
+        subfolder: \$subfolder
+        activeSystemsDeploy: \$activeSystemsDeploy
+        activeSystemsRemove: \$activeSystemsRemove
+        activeSystemsTask: \$activeSystemsTask
+        autoIdle: \$autoIdle
+        storageCalc: \$storageCalc
+        pullrequests: \$pullrequests
+        openshift: \$openshift
+        openshiftProjectPattern: \$openshiftProjectPattern
+        developmentEnvironmentsLimit: \$developmentEnvironmentsLimit
       }
     }
   ) {
