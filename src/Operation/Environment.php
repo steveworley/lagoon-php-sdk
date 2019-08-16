@@ -75,7 +75,7 @@ class Environment extends LagoonOperationBase {
    *   The lagoon query object.
    */
   public function delete($name, $project, $execute = false) {
-    return $this->query(self::DELETE, [
+    return $this->mutation(self::DELETE, [
       'name' => $name,
       'project' => $project,
       'execute' => $execute,
