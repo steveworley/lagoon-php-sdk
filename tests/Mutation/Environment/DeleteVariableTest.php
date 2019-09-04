@@ -37,7 +37,7 @@ class DeleteVariableTest extends TestCase {
 mutation DeleteEnvVar(
   \$id: Int!
 ) {
-  deleteEnvironment(input: {
+  deleteEnvVariable(input: {
     id: \$id
   })
 }

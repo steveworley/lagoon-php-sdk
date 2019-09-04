@@ -26,7 +26,7 @@ class DeleteVariable extends LagoonQueryBase {
 mutation DeleteEnvVar(
   \$id: Int!
 ) {
-  deleteEnvironment(input: {
+  deleteEnvVariable(input: {
     id: \$id
   })
 }
