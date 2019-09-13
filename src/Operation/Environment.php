@@ -7,6 +7,7 @@ use Lagoon\Query\Environment\FindByOpenshiftProject;
 use Lagoon\Mutation\Environment\AddVariable;
 use Lagoon\Mutation\Environment\DeleteVariable;
 use Lagoon\Mutation\Environment\Delete;
+use Lagoon\Mutation\Environment\DeployPullRequest;
 use Lagoon\Mutation\Environment\Update;
 use Lagoon\Query\Environment\All;
 
@@ -24,6 +25,7 @@ class Environment extends LagoonOperationBase {
   const DELETE_VAR = 'delete_var';
   const DELETE = 'delete';
   const UPDATE = 'update';
+  const DEPLOY_PR = 'deploy_pr';
 
   /**
    * {@inheritdoc}
@@ -35,7 +37,8 @@ class Environment extends LagoonOperationBase {
       ->addMutation(self::ADD_VAR, AddVariable::class)
       ->addMutation(self::DELETE_VAR, DeleteVariable::class)
       ->addMutation(self::DELETE, Delete::class)
-      ->addMutation(self::UPDATE, Update::class);
+      ->addMutation(self::UPDATE, Update::class)
+      ->addMutatoin(self::DEPLOY_PR, DeployPullRequest::class);
   }
 
   /**
@@ -124,5 +127,37 @@ class Environment extends LagoonOperationBase {
    */
   public function deleteVariable($id) {
     return $this->mutation(self::DELETE_VAR, ['id' => $id]);
+  }
+
+  /**
+   * Deploy a pull request environment.
+   *
+   * @param string $name
+   *   The project name
+   * @param int $numbe
+   *   The PR number
+   * @param string $headName
+   *   The branch we're merging.
+   * @param string $headRef
+   *   The ref of the branch we're merging.
+   * @param string $baseName
+   *   The branch were merging in to.
+   * @param string $baseRef
+   *   The ref of the branch we're merging in to.
+   *
+   * @return Lagoon\LagoonQueryInterface
+   *   The lagoon query object.
+   */
+  public function deployPullRequest($name, $number, $title, $headName, $headRef, $baseName, $baseRef) {
+    $payload = [
+      'name' => $name,
+      'number' => $number,
+      'title' => $title,
+      'headBranchName' => $headName,
+      'headBranchRef' => $headRef,
+      'baseBranchName' => $baseName,
+      'baseBranchRef' => $baseRef,
+    ];
+    return $this->mutation(self::DEPLOY_PR, $payload);
   }
 }
