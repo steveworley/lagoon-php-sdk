@@ -38,7 +38,7 @@ class Environment extends LagoonOperationBase {
       ->addMutation(self::DELETE_VAR, DeleteVariable::class)
       ->addMutation(self::DELETE, Delete::class)
       ->addMutation(self::UPDATE, Update::class)
-      ->addMutatoin(self::DEPLOY_PR, DeployPullRequest::class);
+      ->addMutation(self::DEPLOY_PR, DeployPullRequest::class);
   }
 
   /**
