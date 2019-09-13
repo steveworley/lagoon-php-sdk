@@ -52,6 +52,7 @@ mutation DeployPullRequest(
   \$headBranchName: String!
   \$headBranchRef: String!
   \$baseBranchName: String!
+  \$baseBranchRef: String!
 ) {
   deployEnvironmentPullrequest(input: {
     project: {
@@ -61,7 +62,7 @@ mutation DeployPullRequest(
     title: \$title
     headBranchName: \$headBranchName
     headBranchRef: \$headBranchRef
-    baseBranchRef: \$baseBranchSha
+    baseBranchRef: \$baseBranchRef
     baseBranchName: \$baseBranchName
   })
 }
