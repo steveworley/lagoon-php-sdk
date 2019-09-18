@@ -29,7 +29,6 @@ class AddTest extends TestCase {
     $expected_keys = $this->callMethod(Add::class, 'expectedKeys');
     $this->assertEquals([
       'name',
-      'customer',
       'openshift',
       'gitUrl',
       'productionEnvironment',
@@ -41,7 +40,6 @@ class AddTest extends TestCase {
     $query = <<<QUERY
 mutation AddNewProject(
   \$name: String!
-  \$customer: Int!
   \$openshift: Int!
   \$gitUrl: String!
   \$productionEnvironment: String!
@@ -49,7 +47,6 @@ mutation AddNewProject(
 ) {
   addProject(input: {
     name: \$name,
-    customer: \$customer,
     openshift: \$openshift,
     gitUrl: \$gitUrl,
     productionEnvironment: \$productionEnvironment,

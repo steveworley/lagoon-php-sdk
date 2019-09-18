@@ -15,7 +15,6 @@ class Add extends LagoonQueryBase {
   protected function expectedKeys(array $variables = []) {
     return [
       'name',
-      'customer',
       'openshift',
       'gitUrl',
       'productionEnvironment',
@@ -30,7 +29,6 @@ class Add extends LagoonQueryBase {
     return <<<QUERY
 mutation AddNewProject(
   \$name: String!
-  \$customer: Int!
   \$openshift: Int!
   \$gitUrl: String!
   \$productionEnvironment: String!
@@ -38,7 +36,6 @@ mutation AddNewProject(
 ) {
   addProject(input: {
     name: \$name,
-    customer: \$customer,
     openshift: \$openshift,
     gitUrl: \$gitUrl,
     productionEnvironment: \$productionEnvironment,
