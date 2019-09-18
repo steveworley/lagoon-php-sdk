@@ -59,7 +59,6 @@ class UpdateTest extends TestCase {
 mutation UpdateProjectMutation(
   \$id: Int!
   \$name: String
-  \$customer: Int
   \$openshift: Int
   \$gitUrl: String
   \$productionEnvironment: String
@@ -79,7 +78,6 @@ mutation UpdateProjectMutation(
       id: \$id,
       patch: {
         name: \$name,
-        customer: \$customer,
         openshift: \$openshift,
         gitUrl: \$gitUrl,
         productionEnvironment: \$productionEnvironment,
