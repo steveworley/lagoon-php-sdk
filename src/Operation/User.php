@@ -67,10 +67,10 @@ class User extends LagoonOperationBase {
    * @return Lagoon\LagoonQueryInterface
    *   The lagoon query object.
    */
-  public function addToProject($user_id, $project = '') {
+  public function addToProject($email, $group) {
     return $this->mutation(self::ADD_TO_PROJECT, [
-      'userId' => $user_id,
-      'project' => $project,
+      'email' => $email,
+      'group' => $group,
     ]);
   }
 }

@@ -15,7 +15,7 @@ class AddUserToProject extends LagoonQueryBase {
   protected function expectedKeys(array $variables = []) {
     return [
       'project',
-      'userId',
+      'email',
     ];
   }
 
@@ -25,13 +25,19 @@ class AddUserToProject extends LagoonQueryBase {
   protected function query() {
     return <<<QUERY
 mutation AddUserToProject(
-  \$project: String!
-  \$userId: Int!
+  \$group: String!
+  \$email: String!
 ) {
-  addUserToProject(input: {
-    project: \$project,
-    userId: \$userId,
-  } ) {
+  addUserToGroup (input: {
+    user: {
+      email: \$email
+    }
+    group: {
+      name: \$group
+    }
+    role: DEVELOPER
+  }
+  ) {
     %s
   }
 }
