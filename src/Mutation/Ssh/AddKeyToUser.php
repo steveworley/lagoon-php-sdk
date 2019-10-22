@@ -17,7 +17,7 @@ class AddKeyToUser extends LagoonQueryBase {
       'name',
       'keyType',
       'keyValue',
-      'userId',
+      'email',
     ];
   }
 
@@ -30,13 +30,15 @@ mutation AddKeyToUser(
   \$name: String!
   \$keyValue: String!
   \$keyType: SshKeyType!
-  \$userId: Int!
+  \$email: String!
 ) {
   addSshKey(input: {
     name: \$name,
     keyType: \$keyType,
     keyValue: \$keyValue,
-    userId: \$userId,
+    user : {
+      email: \$email
+    }
   } ) {
     %s
   }

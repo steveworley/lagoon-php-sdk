@@ -37,12 +37,12 @@ class Ssh extends LagoonOperationBase {
    * @return Lagoon\LagoonQueryInterface
    *   The lagoon query object.
    */
-  public function addToUser($key, $user_id, $type = 'SSH_RSA', $name = 'sdk') {
+  public function addToUser($key, $email, $type = 'SSH_RSA', $name = 'sdk') {
     return $this->mutation(self::ADD_KEY_TO_USER, [
       'name' => $name,
       'keyType' => $type,
       'keyValue' => $key,
-      'userId' => $user_id,
+      'email' => $email,
     ]);
   }
 }
