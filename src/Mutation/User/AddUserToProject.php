@@ -14,7 +14,7 @@ class AddUserToProject extends LagoonQueryBase {
    */
   protected function expectedKeys(array $variables = []) {
     return [
-      'project',
+      'group',
       'email',
     ];
   }

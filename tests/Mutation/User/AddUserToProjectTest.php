@@ -28,21 +28,27 @@ class AddUserToProjectTest extends TestCase {
   public function testExpectedKeys() {
     $expected_keys = $this->callMethod(AddUserToProject::class, 'expectedKeys');
     $this->assertEquals([
-      'project',
-      'userId',
+      'group',
+      'email',
     ], $expected_keys);
   }
 
   public function testQuery() {
     $query = <<<QUERY
 mutation AddUserToProject(
-  \$project: String!
-  \$userId: Int!
+  \$group: String!
+  \$email: String!
 ) {
-  addUserToProject(input: {
-    project: \$project,
-    userId: \$userId,
-  } ) {
+  addUserToGroup (input: {
+    user: {
+      email: \$email
+    }
+    group: {
+      name: \$group
+    }
+    role: MAINTAINER
+  }
+  ) {
     %s
   }
 }
