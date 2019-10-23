@@ -26,6 +26,7 @@ class Project extends LagoonOperationBase {
   const FETCH_BY_NAME = 'name';
   const FETCH_ALL = 'all';
   const FETCH_BY_GIT = 'git';
+  const FETCH_PRIVATE_KEY = 'privatekey';
 
   /**
    * {@inheritdoc}
@@ -38,7 +39,8 @@ class Project extends LagoonOperationBase {
       ->addMutation(self::DEPLOY_ENVIRONMENT_LATEST, DeployEnvironmentLatest::class)
       ->addQuery(self::FETCH_BY_NAME, FindByName::class)
       ->addQuery(self::FETCH_ALL, FetchAll::class)
-      ->addQuery(self::FETCH_BY_GIT, FindByGit::class);
+      ->addQuery(self::FETCH_BY_GIT, FindByGit::class)
+      ->addQuery(self::FETCH_PRIVATE_KEY, FindPrivateKey::class);
   }
 
   /**
@@ -127,5 +129,9 @@ class Project extends LagoonOperationBase {
    */
   public function all() {
     return $this->query(SELF::FETCH_ALL);
+  }
+
+  public function private_key($name) {
+    return $this->query(SELF::FETCH_PRIVATE_KEY);
   }
 }
