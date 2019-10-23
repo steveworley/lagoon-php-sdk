@@ -35,7 +35,7 @@ mutation AddUserToProject(
     group: {
       name: \$group
     }
-    role: DEVELOPER
+    role: MAINTAINER
   }
   ) {
     %s
