@@ -31,7 +31,7 @@ class AddKeyToUserTest extends TestCase {
       'name',
       'keyType',
       'keyValue',
-      'userId',
+      'email',
     ], $expected_keys);
   }
 
@@ -41,13 +41,15 @@ mutation AddKeyToUser(
   \$name: String!
   \$keyValue: String!
   \$keyType: SshKeyType!
-  \$userId: Int!
+  \$email: String!
 ) {
   addSshKey(input: {
     name: \$name,
     keyType: \$keyType,
     keyValue: \$keyValue,
-    userId: \$userId,
+    user : {
+      email: \$email
+    }
   } ) {
     %s
   }
