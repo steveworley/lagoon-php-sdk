@@ -84,6 +84,5 @@ class LagoonClient implements LagoonClientInterface {
       }
       return $this->operations[$method];
     }
-    return parent::__call($method, $arguments);
   }
 }
