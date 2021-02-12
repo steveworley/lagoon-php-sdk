@@ -1,13 +1,13 @@
 {
-  "name": "steveworley/lagoon-php-sdk",
-  "description": "Lagoon GraphQL SDK for PHP",
-  "keywords": [],
+  "name": "uselagon/lagoon-php-sdk",
+  "description": "PHP Library for interacting the the Lagoon API.",
+  "keywords": ["hosting", "lagoon", "devops", "sdk", "api"],
   "type": "library",
   "license": "Apache-2.0",
   "authors": [
     {
-      "name": "Steve Worley",
-      "email": "steven.worley@salsadigital.com.au"
+      "name": "Lagoon PHP SDK Team",
+      "homepage": "https://github.com/steveworley/lagoon-php-sdk/graphs/contributors"
     }
   ],
   "require": {
