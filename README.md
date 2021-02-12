@@ -1,30 +1,44 @@
 # Lagoon PHP SDK
 
-[![CircleCI](https://circleci.com/gh/steveworley/lagoon-php-sdk.svg?style=svg&circle-token=0b96bf2aab7e227d9a6b528fe5dff25d4de6e537)](https://circleci.com/gh/steveworley/lagoon-php-sdk)
-
 The *Lagoon SDK for PHP* makes it easy for developers to connect their applications to the Lagoon GraphQL service in PHP Code.
 
 ## Getting started
 
-Require the package using compsoer.
+Require the package using [Composer](https://getcomposer.org/):
 
 ```
-composer require steveworley/lagoon-php-sdk
+composer require uselagoon/lagoon-php-sdk
 ```
-
-Define the `$endpoint` and `$token` to create a new client instance.
 
 ## Quick Examples
 
 ### Fetch all projects
 
-``` php
+```php
 <?php
 
 use Lagoon\LagoonClient;
+use Lagoon\LagoonResponse;
+
+// The full URL to the GraphQL endpoint.
+$endpoint = "https://lagoon.api:8000/graphql";
+
+// The Token to use to connect to the LagoonAPI. 
+$token = "APITokenFromLagoonAPI";
 
 $client = new LagoonClient($endpoint, $token);
-$customers = $client->customer()->all()->execute();
+
+/** @var LagoonResponse $projects */
+$response = $client->project()->all()->execute();
+
+if ($response->hasErrors()) {
+  throw new \Exception("There were errors returned from the GraphQL API: " . implode(PHP_EOL, $response->errors()));
+}
+else {
+  $projects = $response->all();
+  print "Projects Found: " . count($projects);
+  print_r($projects);
+}
 ```
 
 ### Fetch all project names
@@ -35,7 +49,7 @@ $customers = $client->customer()->all()->execute();
 use Lagoon\LagoonClient;
 
 $client = new LagoonClient($endpoint, $token);
-$customers = $client->project()->all()->fields(['name'])->execute();
+$projects = $client->project()->all()->fields(['name'])->execute();
 ```
 
 ### Add a project
@@ -54,5 +68,11 @@ $project = [
   'productEnvironment' => 'master',
   'branches' => 'master',
 ];
-$customers = $client->project()->add($project)->execute();
+$response = $client->project()->add($project)->execute();
 ```
+
+## About this Package
+
+
+This project was originally developed by @steveworley et al in the repo https://github.com/steveworley/lagoon-php-sdk.
+It is currently being improved upon to be released as officially supported by the Lagoon Team. 
