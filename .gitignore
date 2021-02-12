@@ -1,5 +1,5 @@
 # ignore IDE/hidden/OS cache files
-.*
+.idea
 *~
 nbproject
 nb-configuration.xml
